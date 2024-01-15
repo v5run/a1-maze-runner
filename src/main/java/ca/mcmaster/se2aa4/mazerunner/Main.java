@@ -22,7 +22,7 @@ public class Main {
                         if (line.charAt(idx) == '#') {
                             logger.info("WALL ");
                         } else if (line.charAt(idx) == ' ') {
-                            logger("PASS ");
+                            logger.info("PASS ");
                         }
                     }
                     logger.info(System.lineSeparator());
