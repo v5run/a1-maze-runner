@@ -1,9 +1,6 @@
 package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 import com.sun.net.httpserver.HttpsConfigurator;
@@ -19,6 +16,7 @@ public class Main {
     // make objects for maze, path classes
 
     public static void main(String[] args) {
+        int argP = 0;
         logger.info("** Starting Maze Runner");
         if (("-i").equals(args[0]) ||("--input").equals(args[0])){
             logger.info("**** Reading the maze from file " + args[1]);
@@ -43,25 +41,27 @@ public class Main {
         // if p arguments
         try{
             if (("-p").equals(args[2])){
-                Path path = new Path(args[3]);
+                Path path = new Path(args[3]); //send in matrix for maze too
                 String can_path = path.canonical(); //implement class to the string and turn into canonical form
-                boolean status = path.checkpath(); // boolean to see if path exists on given map.
+                path.status(); // return statement to user stating whether path works
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();
             }
         } catch (ArrayIndexOutOfBoundsException e){
             logger.info("/!\\No -p arguments given/!\\");
+            argP = 1;
         }
 
         // if no p arguments
         try{
-            if (!(("-p").equals(args[2]))){
+            if (argP == 1){
                 logger.info("**** Computing path");
-                String correct_path = Path.canonical(args[2]);
+                Path auto_path = new Path("none");
+                //find the correct path b/c no path was given by the user
 
-                Path.compute(correct_path); // compute the path on maze
-                Path.CtoF(correct_path); //print factorized form of canonical
+                Path.compute(); // compute the path on maze
+                Path.CtoF(); //print factorized form of canonical
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();
