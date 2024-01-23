@@ -1,12 +1,18 @@
 package main.java.ca.mcmaster.se2aa4.mazerunner;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import src.main.java.ca.mcmaster.se2aa4.mazerunner.*;
 
+import com.sun.net.httpserver.HttpsConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Maze {
     
-
-    public static void create(String filename) throws IOException{
+    public String[] create(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         while ((line = reader.readLine()) != null) {
