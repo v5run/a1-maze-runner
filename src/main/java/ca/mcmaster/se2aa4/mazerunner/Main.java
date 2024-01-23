@@ -9,6 +9,7 @@ import java.io.IOException;
 import com.sun.net.httpserver.HttpsConfigurator;
 
 import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
+import main.java.ca.mcmaster.se2aa4.mazerunner.Path;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +28,7 @@ public class Main {
                 //have a method where the maze is stored and can be called upon in other scenarios
                 Maze maze = new Maze();
                 //store matrix as string
-                String[] maze_matrix = maze.create(args[1]);
+                String[] maze_matrix = maze.matrix(args[1]);
             } catch (IOException e){
                 logger.info("Innapropriate File name for Maze");
                 System.exit(0);
@@ -42,8 +43,9 @@ public class Main {
         // if p arguments
         try{
             if (("-p").equals(args[2])){
-                String user_path = Path.canonical(args[3]); //implement class to tke string and turn into canonical form
-                boolean status = Path.checkpath; // boolean to see if path exists on given map.
+                Path path = new Path(args[3]);
+                String can_path = path.canonical(); //implement class to the string and turn into canonical form
+                boolean status = path.checkpath(); // boolean to see if path exists on given map.
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();

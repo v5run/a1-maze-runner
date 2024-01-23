@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Maze {
     
-    public String[] create(String filename) throws IOException{
+    public void create(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -25,5 +25,10 @@ public class Maze {
             }
             logger.info(System.lineSeparator());
         }
+    }
+    public String[] matrix(String filename) throws IOException{
+        
+        String[] maze = new String[10000];
+        return maze;
     }
 }
