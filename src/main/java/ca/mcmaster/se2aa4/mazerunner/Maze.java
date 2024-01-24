@@ -43,7 +43,7 @@ public class Maze {
                     maze[i][j]="PASS";
                 }
                 // if j==0 or j==len of line and  maze[i][j] == "PASS", then set as entry or exit (entry first)
-                if (((j==0) || (j==(line.length-1))) && (maze[i][j] == "PASS")){
+                if (((j==0) || (j==(line.length()-1))) && (maze[i][j] == "PASS")){
                     if (entry.length == 0){
                         entry[0] = i;
                         entry[1] = j;
