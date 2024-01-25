@@ -12,22 +12,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Main {
-    private static final java.util.logging.Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
     // make objects for maze, path classes
 
     public static void main(String[] args) {
         int argP = 1;
         Maze maze = new Maze();
+        
         logger.info("** Starting Maze Runner");
         if (("-i").equals(args[0]) ||("--input").equals(args[0])){
             logger.info("**** Reading the maze from file " + args[1]);
             // send into maze reader to see if filename is good, else throw exception
-            try{
-                //make the maze given the second argument (txt file of maze)
-                //have a method where the maze is stored and can be called upon in other scenarios
-                
+            try{                
                 //store matrix as string
-                String[] maze_matrix = maze.matrix(args[1]);
+                maze.matrix(args[1]);
             } catch (IOException e){
                 logger.info("Innapropriate File name for Maze");
                 System.exit(0);
@@ -41,9 +39,9 @@ public class Main {
 
         // if p arguments
         try{
-            if (("-p").equals(args[2])){
+            if (("-p").equals(args[2])){ // account for spaces in args
                 Path path = new Path(args[3], maze); //send in matrix for maze too
-                String can_path = path.canonical(); //implement class to the string and turn into canonical form
+                //String can_path = path.canonical(); //implement class to the string and turn into canonical form
                 path.status(); // return statement to user stating whether path works
             }
             else{
@@ -58,7 +56,7 @@ public class Main {
         try{
             if (argP == 0){
                 logger.info("**** Computing path");
-                Path auto_path = new Path("none");
+                Path auto_path = new Path("none", maze);
                 //find the correct path b/c no path was given by the user
 
                 Path.compute(); // compute the path on maze
