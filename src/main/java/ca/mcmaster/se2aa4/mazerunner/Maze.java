@@ -1,4 +1,4 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
 //import java.io.File;

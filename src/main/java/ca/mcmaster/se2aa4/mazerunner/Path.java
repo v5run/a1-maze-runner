@@ -1,8 +1,6 @@
-package main.java.ca.mcmaster.se2aa4.mazerunner;
-
+//package main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 import java.io.IOException;
-import src.main.java.ca.mcmaster.se2aa4.mazerunner.Main;
-import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
 
 public class Path {
 

@@ -1,12 +1,8 @@
-package src.main.java.ca.mcmaster.se2aa4.mazerunner;
-import src.main.java.ca.mcmaster.se2aa4.mazerunner.*;
+//package src.main.java.ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
-
 import com.sun.net.httpserver.HttpsConfigurator;
-
-import main.java.ca.mcmaster.se2aa4.mazerunner.Maze;
-import main.java.ca.mcmaster.se2aa4.mazerunner.Path;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
