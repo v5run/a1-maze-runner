@@ -1,19 +1,18 @@
 package main.java.ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-import java.io.File;
+//import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import src.main.java.ca.mcmaster.se2aa4.mazerunner.*;
-
-import com.sun.net.httpserver.HttpsConfigurator;
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
 
 public class Maze {
 
-    public int[] entry = new int[2];
-    public int[] exit = new int[2];
+    // storing entry and exit points
+    public int[] e_east = new int[2];
+    public int[] e_west = new int[2];
+    public String[][] string_matrix;
     
     public void create(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -29,7 +28,7 @@ public class Maze {
             //logger.info(System.lineSeparator());
         }
     }
-    public String[][] matrix(String filename) throws IOException{
+    public void matrix(String filename) throws IOException{
         
         String[][] maze = new String[10000][10000];
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -43,21 +42,29 @@ public class Maze {
                     maze[i][j]="PASS";
                 }
                 // if j==0 or j==len of line and  maze[i][j] == "PASS", then set as entry or exit (entry first)
-                if (((j==0) || (j==(line.length()-1))) && (maze[i][j] == "PASS")){
-                    if (entry.length == 0){
-                        entry[0] = i;
-                        entry[1] = j;
-                    }
-                    else{
-                        exit[0] = i;
-                        exit[1] = j;
-                    }
+                if ((j==0) && (maze[i][j] == "PASS")){
+                    e_east[0] = i;
+                    e_east[1] = j;
                 }
+                if ((j==(line.length()-1)) && (maze[i][j] == "PASS")){
+                    e_west[0] = i;
+                    e_west[1] = j;
+                }
+
                 j++;
             }
             i++;
         }
-        return maze;
+        string_matrix = maze;
     }
+
+    public int[] getEEast() {
+        return e_east;
+    }
+
+    public int[] getEWest() {
+        return e_west;
+    }
+    
     //public void entry_exit(){} //finds entry and exit points in maze
 }
