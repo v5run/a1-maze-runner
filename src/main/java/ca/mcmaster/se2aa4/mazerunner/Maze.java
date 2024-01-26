@@ -1,14 +1,15 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.BufferedReader;
-//import java.io.File;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Maze {
 
+    private static final Logger logger = LogManager.getLogger();
     // storing entry and exit points
     public int[] e_east = new int[2];
     public int[] e_west = new int[2];
@@ -20,11 +21,12 @@ public class Maze {
         while ((line = reader.readLine()) != null) {
             for (int idx = 0; idx < line.length(); idx++) {
                 if (line.charAt(idx) == '#') {
-                    //logger.info("WALL ");
+                    System.out.print("WALL ");
                 } else if (line.charAt(idx) == ' ') {
-                    //logger.info("PASS ");
+                    System.out.print("PASS ");
                 }
             }
+            System.out.println();
             //logger.info(System.lineSeparator());
         }
     }
@@ -40,20 +42,19 @@ public class Maze {
                     maze[i][j]="WALL";
                 } else if (line.charAt(idx) == ' ') {
                     maze[i][j]="PASS";
+                    if (j==0){
+                        e_east[0] = i;
+                        e_east[1] = j;
+                    }
+                    if (j==(line.length()-1)){
+                        e_west[0] = i;
+                        e_west[1] = j;
+                    }
                 }
-                // if j==0 or j==len of line and  maze[i][j] == "PASS", then set as entry or exit (entry first)
-                if ((j==0) && (maze[i][j] == "PASS")){
-                    e_east[0] = i;
-                    e_east[1] = j;
-                }
-                if ((j==(line.length()-1)) && (maze[i][j] == "PASS")){
-                    e_west[0] = i;
-                    e_west[1] = j;
-                }
-
-                j++;
+                j+=1;
             }
-            i++;
+            i+=1;
+            j=0;
         }
         string_matrix = maze;
     }

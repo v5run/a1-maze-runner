@@ -1,4 +1,3 @@
-//package src.main.java.ca.mcmaster.se2aa4.mazerunner;
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.IOException;
@@ -19,9 +18,17 @@ public class Main {
         if (("-i").equals(args[0]) ||("--input").equals(args[0])){
             logger.info("**** Reading the maze from file " + args[1]);
             // send into maze reader to see if filename is good, else throw exception
-            try{                
+            try{
+                logger.info("**** Given Maze: \n");
+                maze.create(args[1]);
+                System.out.println();
+
                 //store matrix as string
                 maze.matrix(args[1]);
+                logger.info("**** Entry/Exit Points: ");
+                System.out.println( "[" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
+                System.out.println( "[" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
+
             } catch (IOException e){
                 logger.info("Innapropriate File name for Maze");
                 System.exit(0);
