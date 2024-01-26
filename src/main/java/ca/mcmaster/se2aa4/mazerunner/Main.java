@@ -30,7 +30,7 @@ public class Main {
                 System.out.println( "[" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
 
             } catch (IOException e){
-                logger.info("Innapropriate File name for Maze");
+                logger.info("**** Innapropriate File name for Maze");
                 System.exit(0);
             }
         }
@@ -43,6 +43,8 @@ public class Main {
         // if p arguments
         try{
             if (("-p").equals(args[2])){ // account for spaces in args
+                logger.info("**** Found -p tag!");
+
                 Path path = new Path(args[3], maze); //send in matrix for maze too
                 //String can_path = path.canonical(); //implement class to the string and turn into canonical form
                 path.status(); // return statement to user stating whether path works

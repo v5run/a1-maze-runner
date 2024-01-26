@@ -10,9 +10,9 @@ import org.apache.logging.log4j.Logger;
 public class Maze {
 
     private static final Logger logger = LogManager.getLogger();
-    // storing entry and exit points
-    public int[] e_east = new int[2];
-    public int[] e_west = new int[2];
+    
+    private int[] e_east = new int[2];
+    private int[] e_west = new int[2];
     public String[][] string_matrix;
     
     public void create(String filename) throws IOException{

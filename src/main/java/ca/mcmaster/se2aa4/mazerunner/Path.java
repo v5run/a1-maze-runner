@@ -10,7 +10,7 @@ public class Path {
     public String user_path;
     private String[] can_path; //CREATE A METHOD TO TURN CMD LINE ARGUMENTS INTO CANONICAL PATH
     public Maze maze;
-    public boolean status;
+    private boolean status_east=false, status_west=false;
     private String direction = "EAST";
 
     // make another class that deals separately (UserPath, CompPath)
@@ -30,7 +30,6 @@ public class Path {
     }
     public void status() {
 
-        boolean status_east=false, status_west=false;
         try{
             // from East -> West, go through eastern entry and end at western entry
             status_east = isPathValid("WEST", maze.getEEast(), maze.getEWest());
@@ -40,7 +39,7 @@ public class Path {
 
         } catch(IndexOutOfBoundsException e){
             //logger.info("/!\\No -p arguments given/!\\");
-            System.out.println("Error: East to West path does not work.");
+            System.out.println("**** Path failed: East to West");
         }
 
         try{
@@ -52,12 +51,12 @@ public class Path {
             else{System.out.println("**** Path failed: West to East");}
 
         } catch(IndexOutOfBoundsException e){
-            System.out.println("Error: West to East path does not work.");
+            System.out.println("**** Path failed: West to East");
         }
 
         // print statements if path exists or doesn't
     }
-    public boolean isPathValid(String d, int[] entry, int[] exit) throws IndexOutOfBoundsException{
+    private boolean isPathValid(String d, int[] entry, int[] exit) throws IndexOutOfBoundsException{
 
         direction = d;
         int[] start = entry;
