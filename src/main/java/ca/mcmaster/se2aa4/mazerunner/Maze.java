@@ -43,12 +43,12 @@ public class Maze {
                 } else if (line.charAt(idx) == ' ') {
                     maze[i][j]="PASS";
                     if (j==0){
-                        e_east[0] = i;
-                        e_east[1] = j;
-                    }
-                    if (j==(line.length()-1)){
                         e_west[0] = i;
                         e_west[1] = j;
+                    }
+                    if (j==(line.length()-1)){
+                        e_east[0] = i;
+                        e_east[1] = j;
                     }
                 }
                 j+=1;
