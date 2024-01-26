@@ -18,9 +18,9 @@ public class Path {
     //constructor
     public Path(String path, Maze maze){
 
+        this.maze = maze; // calls the string version of the matrix
         this.user_path = path;
         this.can_path = path.split("");
-        this.maze = maze; // calls the string version of the matrix
     }
 
     //public static void canonical() {
@@ -43,6 +43,7 @@ public class Path {
         }
 
         try{
+            
             // from West -> East, go through western entry and end at eastern exit 
             status_west = isPathValid("EAST", maze.getEWest(), maze.getEEast());
             
@@ -62,11 +63,18 @@ public class Path {
         int[] start = entry;
         int[] end = exit;
         //              [x, y] location
-        int[] current = start;
+        int[] current = new int[2];
+        current[0] = start[0];
+        current[1] = start[1];
+
+        System.out.println( "Start: [" + Integer.toString(start[0]) + ", " + Integer.toString(start[1]) + "]");
+        System.out.println( "End: [" + Integer.toString(end[0]) + ", " + Integer.toString(end[1]) + "]");
 
         logger.info("**** Computing provided path");
 
         for (int i=0; i<can_path.length; i++){
+            
+            //System.out.println( "CP: [" + Integer.toString(current[0]) + ", " + Integer.toString(current[1]) + "]");
 
             if (direction.equals("EAST")){
                 if (can_path[i].equals("F")){
@@ -134,7 +142,10 @@ public class Path {
             }   
         }
         
+        //System.out.println( "FP: [" + Integer.toString(current[0]) + ", " + Integer.toString(current[1]) + "]");
+
         if ((current[0] == end[0])&&(current[1] == end[1])){
+            //System.out.println("Working.");
             return true;
         }
         else{

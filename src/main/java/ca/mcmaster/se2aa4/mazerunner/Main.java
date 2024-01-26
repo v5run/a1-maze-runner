@@ -26,8 +26,8 @@ public class Main {
                 //store matrix as string
                 maze.matrix(args[1]);
                 logger.info("**** Entry/Exit Points: ");
-                System.out.println( "[" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
-                System.out.println( "[" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
+                System.out.println( "West End: [" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
+                System.out.println( "East End: [" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
 
             } catch (IOException e){
                 logger.info("**** Innapropriate File name for Maze");
@@ -44,6 +44,7 @@ public class Main {
         try{
             if (("-p").equals(args[2])){ // account for spaces in args
                 logger.info("**** Found -p tag!");
+                
 
                 Path path = new Path(args[3], maze); //send in matrix for maze too
                 //String can_path = path.canonical(); //implement class to the string and turn into canonical form
