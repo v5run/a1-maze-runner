@@ -45,10 +45,10 @@ public class Main {
             if (("-p").equals(args[2])){ // account for spaces in args
                 logger.info("**** Found -p tag!");
                 
+                Path path = new Path(args[3], maze);
+                path.canonical();
 
-                Path path = new Path(args[3], maze); //send in matrix for maze too
-                //String can_path = path.canonical(); //implement class to the string and turn into canonical form
-                path.status(); // return statement to user stating whether path works
+                path.status();
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();

@@ -35,12 +35,24 @@ public class Maze {
         String[][] maze = new String[10000][10000];
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
-        int i=0, j=0;
+        int i=0, j=0, lengthOfFirstRow=0;
         while (((line = reader.readLine()) != null)&&(i<10000)) {
-            for (int idx = 0; idx < line.length(); idx++) {
-                if (line.charAt(idx) == '#') {
-                    maze[i][j]="WALL";
-                } else if (line.charAt(idx) == ' ') {
+            if ((i==0)&&(j==0)){
+                lengthOfFirstRow = line.length();
+            }
+            for (int idx = 0; idx < lengthOfFirstRow; idx++) {
+                if (line.length() == 0){
+                    maze[i][j]="PASS";
+                    if (j==0){
+                        e_west[0] = i;
+                        e_west[1] = j;
+                    }
+                    if (j==(lengthOfFirstRow-1)){
+                        e_east[0] = i;
+                        e_east[1] = j;
+                    }
+                }
+                else if (line.charAt(idx) == ' ') {
                     maze[i][j]="PASS";
                     if (j==0){
                         e_west[0] = i;
@@ -50,6 +62,9 @@ public class Maze {
                         e_east[0] = i;
                         e_east[1] = j;
                     }
+                }
+                else if (line.charAt(idx) == '#') {
+                    maze[i][j]="WALL";
                 }
                 j+=1;
             }
