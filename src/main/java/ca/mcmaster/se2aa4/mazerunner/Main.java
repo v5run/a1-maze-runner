@@ -19,24 +19,25 @@ public class Main {
             logger.info("**** Reading the maze from file " + args[1]);
             // send into maze reader to see if filename is good, else throw exception
             try{
-                logger.info("**** Given Maze: \n");
+                System.out.println("Maze: \n");
                 maze.create(args[1]);
                 System.out.println();
 
                 //store matrix as string
                 maze.matrix(args[1]);
-                logger.info("**** Entry/Exit Points: ");
-                System.out.println( "West End: [" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
-                System.out.println( "East End: [" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
+                System.out.println("Entry/Exit Points: ");
+                System.out.println( "   West End: [" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
+                System.out.println( "   East End: [" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
+                System.out.println();
 
             } catch (IOException e){
-                logger.info("**** Innapropriate File name for Maze");
+                logger.error("**** Innapropriate File name for Maze");
                 System.exit(0);
             }
         }
         else{
             // no -i, then exit
-            logger.info("/!\\No -i arguments given/!\\");
+            logger.error("/!\\No -i arguments given/!\\");
             System.exit(1);
         }
 
@@ -47,7 +48,6 @@ public class Main {
                 
                 Path path = new Path(args[3], maze);
                 path.canonical();
-
                 path.status();
             }
             else{
@@ -61,19 +61,20 @@ public class Main {
         // if no p arguments
         try{
             if (argP == 0){
-                logger.info("**** Computing path");
-                Path auto_path = new Path("none", maze);
+                logger.info("**** Computing path for given Maze ****");
+                //Path auto_path = new Path("none", maze);
                 //find the correct path b/c no path was given by the user
 
-                Path.compute(); // compute the path on maze
-                Path.CtoF(); //print factorized form of canonical
+                //Path.compute(); // compute the path on maze
+                String f_path = PathString.toFactorized("FLFRFFLFFFFFFRFFFFRFFLFFRFFLF"); //print factorized form of canonical
+                System.out.println(f_path);
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();
             }
         } catch (Exception e){
-            logger.info("PATH NOT COMPUTED");;
+            logger.error("PATH NOT COMPUTED");;
         }
-        logger.info("** End of MazeRunner");
+        logger.info("** End of MazeRunner **");
     }
 }
