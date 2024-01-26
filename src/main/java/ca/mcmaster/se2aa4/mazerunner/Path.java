@@ -33,7 +33,7 @@ public class Path {
     public void status() {
 
         try{
-            logger.info("**** Computing path from East -> West");
+            logger.info("**** Checking path: East -> West");
 
             // from East -> West, go through eastern entry and end at western entry
             status_east = isPathValid("WEST", maze.getEEast(), maze.getEWest());
@@ -47,7 +47,7 @@ public class Path {
         }
 
         try{
-            logger.info("**** Computing path from West -> East");
+            logger.info("**** Checking path: West -> East");
             
             // from West -> East, go through western entry and end at eastern exit 
             status_west = isPathValid("EAST", maze.getEWest(), maze.getEEast());
@@ -158,8 +158,5 @@ public class Path {
         }
 
     }
-    public static void CtoF() { // maybe make separate paths 
-    }
-
     
 }
