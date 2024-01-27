@@ -32,44 +32,51 @@ public class Maze {
     }
     public void matrix(String filename) throws IOException{
         
-        String[][] maze = new String[10000][10000];
+        String[][] maze = new String[100][100];
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
-        int i=0, j=0, lengthOfFirstRow=0;
-        while (((line = reader.readLine()) != null)&&(i<10000)) {
-            if ((i==0)&&(j==0)){
+        int i=0, lengthOfFirstRow=0;
+        while (((line = reader.readLine()) != null)&&(i<100)) {
+            if (i==0){
                 lengthOfFirstRow = line.length();
             }
-            for (int idx = 0; idx < lengthOfFirstRow; idx++) {
-                if (line.length() == 0){
+            for (int j=0; j < lengthOfFirstRow; j++) {
+                
+                try {
+                    System.out.println("[ " + i + ", " + j + " ]");
+                    
+                    if ((line.length() == 0)||(j>=line.length())){
+                        maze[i][j]="PASS";
+                        if (j==0){
+                            e_west[0] = i;
+                            e_west[1] = j;
+                        }
+                        if (j==(lengthOfFirstRow-1)){
+                            e_east[0] = i;
+                            e_east[1] = j;
+                        }
+                    }
+                    else if (line.charAt(j) == ' ') {
+                        maze[i][j]="PASS";
+                        if (j==0){
+                            e_west[0] = i;
+                            e_west[1] = j;
+                        }
+                        if (j==(line.length()-1)){
+                            e_east[0] = i;
+                            e_east[1] = j;
+                        }
+                    }
+                    else if (line.charAt(j) == '#') {
+                        maze[i][j]="WALL";
+                    }
+                        
+                } catch (StringIndexOutOfBoundsException e) {
                     maze[i][j]="PASS";
-                    if (j==0){
-                        e_west[0] = i;
-                        e_west[1] = j;
-                    }
-                    if (j==(lengthOfFirstRow-1)){
-                        e_east[0] = i;
-                        e_east[1] = j;
-                    }
                 }
-                else if (line.charAt(idx) == ' ') {
-                    maze[i][j]="PASS";
-                    if (j==0){
-                        e_west[0] = i;
-                        e_west[1] = j;
-                    }
-                    if (j==(line.length()-1)){
-                        e_east[0] = i;
-                        e_east[1] = j;
-                    }
-                }
-                else if (line.charAt(idx) == '#') {
-                    maze[i][j]="WALL";
-                }
-                j+=1;
+                
             }
             i+=1;
-            j=0;
         }
         string_matrix = maze;
     }
