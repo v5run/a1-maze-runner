@@ -40,9 +40,9 @@ public class PathString {
         
         String[] c_list = c_path.split("");
         StringBuilder new_string = new StringBuilder();
-        int j;
+        int j, i;
 
-        for (int i=0; i<c_list.length - 1; i++){
+        for (i=0; i<c_list.length - 1; i++){
 
             if (!(c_list[i].equals(c_list[i+1]))){new_string.append(c_list[i]);}
             else{
@@ -60,7 +60,8 @@ public class PathString {
                 new_string.append(c_list[i]);
             }
         }
-        if (c_list.length > 0) {
+        
+        if (c_list.length > 0 && i < c_list.length - 1 && !c_list[i].equals(String.valueOf(new_string.charAt(new_string.length() - 1)))) {
             new_string.append(c_list[c_list.length - 1]);
         }
         
