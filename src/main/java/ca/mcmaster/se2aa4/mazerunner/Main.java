@@ -65,9 +65,10 @@ public class Main {
                 //Path auto_path = new Path("none", maze);
                 //find the correct path b/c no path was given by the user
 
-                //Path.compute(); // compute the path on maze
-                String f_path = PathString.toFactorized("FLFRFFLFFFFFFRFFFFRFFLFFRFFLF"); //print factorized form of canonical
-                System.out.println(f_path);
+                Path alg = new Path("none", maze);
+                System.out.println(alg.compute()); // compute the path on maze
+                String f_path = PathString.toFactorized(alg.compute()); //print factorized form of canonical
+                System.out.println("Computed Factorized Path: " + f_path);
             }
             else{
                 throw new ArrayIndexOutOfBoundsException();

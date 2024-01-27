@@ -27,9 +27,11 @@ public class Path {
         can_path = pathlist.canonical_list();
     }
 
-    public static void compute() { // find a working path on the maze, maybe have different class
-
+    public String compute() { // find a working path on the maze, maybe have different class
+        RightHandAlg alg = new RightHandAlg(maze);
+        return alg.compute();
     }
+
     public void status() {
 
         try{
