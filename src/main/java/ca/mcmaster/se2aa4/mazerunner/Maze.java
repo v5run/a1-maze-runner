@@ -43,7 +43,7 @@ public class Maze {
             for (int j=0; j < lengthOfFirstRow; j++) {
                 
                 try {
-                    System.out.println("[ " + i + ", " + j + " ]");
+                    //System.out.println("[ " + i + ", " + j + " ]");
                     
                     if ((line.length() == 0)||(j>=line.length())){
                         maze[i][j]="PASS";
