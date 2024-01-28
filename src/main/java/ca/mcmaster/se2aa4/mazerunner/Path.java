@@ -40,12 +40,12 @@ public class Path {
             // from East -> West, go through eastern entry and end at western entry
             status_east = isPathValid("WEST", maze.getEEast(), maze.getEWest());
             
-            if (status_east){logger.info("**** Path works from East to West");}
-            else{logger.error("**** Path failed: East to West");}
+            if (status_east){System.out.println("Path works from East to West");}
+            else{System.out.println("Path failed: East to West");}
 
         } catch(IndexOutOfBoundsException e){
             //logger.info("/!\\No -p arguments given/!\\");
-            logger.error("**** Path failed: East to West");
+            System.out.println("Path failed: East to West");
         }
 
         try{
@@ -55,11 +55,11 @@ public class Path {
             status_west = isPathValid("EAST", maze.getEWest(), maze.getEEast());
             
         
-            if (status_west){logger.info("**** Path works from: West to East");}
-            else{logger.error("**** Path failed: West to East");}
+            if (status_west){System.out.println("Path works from: West to East");}
+            else{System.out.println("Path failed: West to East");}
 
         } catch(IndexOutOfBoundsException e){
-            logger.error("**** Path failed: West to East");
+            System.out.println("Path failed: West to East");
         }
 
         // print statements if path exists or doesn't
@@ -74,8 +74,8 @@ public class Path {
         current[0] = start[0];
         current[1] = start[1];
 
-        System.out.println( "Start: [" + Integer.toString(start[0]) + ", " + Integer.toString(start[1]) + "]");
-        System.out.println( "End: [" + Integer.toString(end[0]) + ", " + Integer.toString(end[1]) + "]");
+        //System.out.println( "Start: [" + Integer.toString(start[0]) + ", " + Integer.toString(start[1]) + "]");
+        //System.out.println( "End: [" + Integer.toString(end[0]) + ", " + Integer.toString(end[1]) + "]");
 
         //logger.info("**** Computing provided path");
 

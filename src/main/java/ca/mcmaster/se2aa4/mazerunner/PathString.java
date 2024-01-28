@@ -32,7 +32,7 @@ public class PathString {
             }
         }
         logger.info("CANONICAL PATH: " + new_string);
-        System.out.println();
+        //System.out.println();
         String[] new_list = new_string.toString().split("");
         return new_list;
     }
@@ -44,7 +44,7 @@ public class PathString {
 
         for (i=0; i<c_list.length - 1; i++){
 
-            if (!(c_list[i].equals(c_list[i+1]))){new_string.append(c_list[i]);}
+            if (!(c_list[i].equals(c_list[i+1]))){new_string.append(c_list[i]); new_string.append(" ");}
             else{
                 int count = 0;
                 for (j=i; j<c_list.length; j++){
@@ -58,6 +58,7 @@ public class PathString {
                 i=j-1;
                 new_string.append(String.valueOf(count));
                 new_string.append(c_list[i]);
+                new_string.append(" ");
             }
         }
         

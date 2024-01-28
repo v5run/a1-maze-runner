@@ -29,6 +29,7 @@ public class Maze {
             System.out.println();
             //logger.info(System.lineSeparator());
         }
+        System.out.println();
     }
     public void matrix(String filename) throws IOException{
         
@@ -79,6 +80,11 @@ public class Maze {
             i+=1;
         }
         string_matrix = maze;
+
+        logger.info("Entry/Exit Points: ");
+        logger.info( "   West End: [" + Integer.toString(getEWest()[0]) + ", " + Integer.toString(getEWest()[1]) + "]");
+        logger.info( "   East End: [" + Integer.toString(getEEast()[0]) + ", " + Integer.toString(getEEast()[1]) + "]");
+        logger.info("\n");
     }
 
     public int[] getEEast() {
