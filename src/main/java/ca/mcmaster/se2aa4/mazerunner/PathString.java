@@ -86,6 +86,9 @@ public class PathString {
         if (c_list.length > 0 && i < c_list.length - 1 && !c_list[i].equals(String.valueOf(new_string.charAt(new_string.length() - 1)))) {
             new_string.append(c_list[c_list.length - 1]);
         }
+        if (!(c_list[i-1].equals("F"))){
+            new_string.append("F");
+        }
         
         return new_string.toString();
     }

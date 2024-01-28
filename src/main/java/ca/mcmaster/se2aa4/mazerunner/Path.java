@@ -74,6 +74,9 @@ public class Path {
         current[0] = start[0];
         current[1] = start[1];
 
+        //System.out.println("CURRENT: " + current[0] + ", " + current[1]);
+        //System.out.println("START: " + start[0] + ", " + start[1]);
+        //System.out.println("END: " + end[0] + ", " + end[1]);
         
         logger.info("**** Computing provided path");
 
@@ -144,6 +147,7 @@ public class Path {
                 }
             }   
         }
+        //System.out.println("EP: " + current[0] + ", " + current[1]);
         
         if ((current[0] == end[0])&&(current[1] == end[1])){
             return true;
