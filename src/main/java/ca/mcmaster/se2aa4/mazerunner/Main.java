@@ -39,7 +39,7 @@ public class Main {
                 
                 Path path = new Path(user_path, maze);
                 path.canonical();
-                path.status();
+                path.isPathValid();
             }
             else{
                 logger.info("**** NO -p ARGUMENT: Computing path for given Maze ****");

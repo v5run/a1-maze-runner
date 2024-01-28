@@ -13,7 +13,7 @@ public class Maze {
     
     private int[] e_east = new int[2];
     private int[] e_west = new int[2];
-    public String[][] string_matrix;
+    private String[][] string_matrix;
     
     public void create(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -93,6 +93,10 @@ public class Maze {
 
     public int[] getEWest() {
         return e_west;
+    }
+
+    public String[][] getMaze(){
+        return string_matrix;
     }
     
     //public void entry_exit(){} //finds entry and exit points in maze

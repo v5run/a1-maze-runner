@@ -19,7 +19,7 @@ public class RightHandAlg {
         int[] c = new int[2];
         int[] end = new int[2];
 
-        String[][] matrix = maze.string_matrix;
+        String[][] matrix = maze.getMaze();
         String direction = "EAST";
         c[0] = (maze.getEWest())[0];
         c[1] = (maze.getEWest())[1];
