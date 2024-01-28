@@ -12,6 +12,17 @@ public class PathString {
         this.path = path;
     }
 
+    public String combine(String[] args){
+
+        StringBuilder new_string = new StringBuilder();
+        new_string.append(path);
+
+        for (int i=0; i<args.length; i++){
+            new_string.append(args[i]);
+        }
+        return new_string.toString();
+    }
+
     public String[] canonical_list(){
 
         char[] c_list = path.toCharArray();

@@ -18,24 +18,23 @@ import org.apache.logging.log4j.Logger;
 public class Main {
     private static final Logger logger = LogManager.getLogger();
     public static void main(String[] args) {
-        int argP = 1;
         Maze maze = new Maze();
         
         logger.info("** Starting Maze Runner");
         try{
             Configuration config = configure(args);
             String inputfile = config.getInputFile();
-            String user_path = config.getUserPath();
-
+            String cmd_path = config.getUserPath();
             String[] p_args = config.getPArgs();
-            System.out.println(p_args[1]);
+            PathString pString = new PathString(cmd_path);
+            String user_path = pString.combine(p_args);            
 
             logger.info("**** Reading the maze from file:  " + inputfile);
             logger.info("Maze: \n");
             //maze.create(inputfile);
             maze.matrix(inputfile);
 
-            if (config.hasP()){ // account for spaces in args
+            if (config.hasP()){
                 logger.info("**** Found -p tag!");
                 
                 Path path = new Path(user_path, maze);
@@ -45,7 +44,7 @@ public class Main {
             else{
                 logger.info("**** NO -p ARGUMENT: Computing path for given Maze ****");
                 Path alg = new Path("none", maze);
-                logger.info(alg.compute()); // compute the path on maze
+                logger.info(alg.compute());
                 System.out.println("Path: " + PathString.toFactorized(alg.compute()));
             }
         } catch (Exception e){
