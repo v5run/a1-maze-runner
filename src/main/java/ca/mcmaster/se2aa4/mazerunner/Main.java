@@ -45,7 +45,7 @@ public class Main {
                 logger.info("**** NO -p ARGUMENT: Computing path for given Maze ****");
                 Path alg = new Path("none", maze);
                 logger.info(alg.compute());
-                System.out.println("Path: " + PathString.toFactorized(alg.compute()));
+                System.out.println("Path: \n" + PathString.toFactorized(alg.compute()));
             }
         } catch (Exception e){
             logger.error("**** Suspected: Innapropriate File name for Maze or missing -i");

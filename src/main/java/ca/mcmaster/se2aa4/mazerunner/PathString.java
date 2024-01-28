@@ -25,18 +25,27 @@ public class PathString {
 
     public String[] canonical_list(){
 
+        //System.out.println(path);
         char[] c_list = path.toCharArray();
         // create a string
         StringBuilder new_string = new StringBuilder();
 
         for (int i=0; i<(c_list.length);i++){
             if (Character.isDigit(c_list[i])){
-                char num = c_list[i];
-                char next_char = c_list[i+1];
-                for (int j=0; j<(num - '0'); j++){
+                
+                // find num, could be any length
+                int numStart = i;
+                while (i<c_list.length && Character.isDigit(c_list[i])){i+=1;}
+                int numEnd = i-1;
+                StringBuilder numString = new StringBuilder();
+
+                for (int k=numStart; k <= numEnd; k++){numString.append(c_list[k]);}
+                int num = Integer.parseInt(numString.toString());
+
+                char next_char = c_list[i];
+                for (int j=0; j<num; j++){
                     new_string.append(Character.toUpperCase(next_char));
                 }
-                i+=1;
             }
             else if ((c_list[i] == 'F') || (c_list[i] == 'f') || (c_list[i] == 'R') || (c_list[i] == 'r') || (c_list[i] == 'L') || (c_list[i] == 'l')){
                 new_string.append(Character.toUpperCase(c_list[i]));
@@ -44,6 +53,7 @@ public class PathString {
         }
         logger.info("CANONICAL PATH: " + new_string);
         //System.out.println();
+        //System.out.println(new_string.toString());
         String[] new_list = new_string.toString().split("");
         return new_list;
     }

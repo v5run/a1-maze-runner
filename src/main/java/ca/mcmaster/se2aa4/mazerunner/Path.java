@@ -59,7 +59,7 @@ public class Path {
             else{System.out.println("Path failed: West to East");}
 
         } catch(IndexOutOfBoundsException e){
-            System.out.println("Path failed: West to East");
+            logger.info("**** Path failed: West to East");
         }
 
         // print statements if path exists or doesn't
@@ -74,15 +74,11 @@ public class Path {
         current[0] = start[0];
         current[1] = start[1];
 
-        //System.out.println( "Start: [" + Integer.toString(start[0]) + ", " + Integer.toString(start[1]) + "]");
-        //System.out.println( "End: [" + Integer.toString(end[0]) + ", " + Integer.toString(end[1]) + "]");
-
-        //logger.info("**** Computing provided path");
+        
+        logger.info("**** Computing provided path");
 
         for (int i=0; i<can_path.length; i++){
             
-            //System.out.println( "CP: [" + Integer.toString(current[0]) + ", " + Integer.toString(current[1]) + "]");
-
             if (direction.equals("EAST")){
                 if (can_path[i].equals("F")){
                     if (("PASS").equals((maze.string_matrix)[current[0]][current[1]+1])){
@@ -149,10 +145,7 @@ public class Path {
             }   
         }
         
-        //System.out.println( "FP: [" + Integer.toString(current[0]) + ", " + Integer.toString(current[1]) + "]");
-
         if ((current[0] == end[0])&&(current[1] == end[1])){
-            //System.out.println("Working.");
             return true;
         }
         else{

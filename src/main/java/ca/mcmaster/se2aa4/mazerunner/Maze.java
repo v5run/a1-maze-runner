@@ -33,7 +33,7 @@ public class Maze {
     }
     public void matrix(String filename) throws IOException{
         
-        String[][] maze = new String[100][100];
+        String[][] maze = new String[10000][10000];
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         int i=0, lengthOfFirstRow=0;
