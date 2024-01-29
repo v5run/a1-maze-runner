@@ -20,18 +20,15 @@ public class Path {
         this.user_path = path;
     }
     public void check(){
-        canonical();
+
+        PathString pathlist = new PathString(user_path);
+        can_path = pathlist.canonical_list();
 
         if(isPathValid()){
             System.out.println("Correct path");
         }
         else{System.out.println("Incorrect path");}
 
-    }
-
-    private void canonical() {
-        PathString pathlist = new PathString(user_path);
-        can_path = pathlist.canonical_list();
     }
 
     public String compute() {
