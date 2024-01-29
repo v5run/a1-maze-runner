@@ -21,7 +21,12 @@ public class Path {
     }
     public void check(){
         canonical();
-        isPathValid();
+
+        if(isPathValid()){
+            System.out.println("Correct path");
+        }
+        else{System.out.println("Incorrect path");}
+
     }
 
     private void canonical() {
@@ -34,7 +39,7 @@ public class Path {
         return alg.compute();
     }
 
-    private void isPathValid() {
+    private boolean isPathValid() {
 
         try{
             logger.info("**** Checking path: East -> West");
@@ -55,9 +60,9 @@ public class Path {
         }
 
         if( status_east || status_west ){
-            System.out.println("Correct path");
+            return true;
         }
-        else{System.out.println("Incorrect path");}
+        else{return false;}
 
     }
     
