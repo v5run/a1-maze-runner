@@ -20,13 +20,15 @@ public class Path {
         this.user_path = path;
     }
     public void check(){
-        canonical();
-        isPathValid();
-    }
 
-    private void canonical() {
         PathString pathlist = new PathString(user_path);
         can_path = pathlist.canonical_list();
+
+        if(isPathValid()){
+            System.out.println("Correct path");
+        }
+        else{System.out.println("Incorrect path");}
+
     }
 
     public String compute() {
@@ -34,7 +36,7 @@ public class Path {
         return alg.compute();
     }
 
-    private void isPathValid() {
+    private boolean isPathValid() {
 
         try{
             logger.info("**** Checking path: East -> West");
@@ -55,9 +57,9 @@ public class Path {
         }
 
         if( status_east || status_west ){
-            System.out.println("Correct path");
+            return true;
         }
-        else{System.out.println("Incorrect path");}
+        else{return false;}
 
     }
     
