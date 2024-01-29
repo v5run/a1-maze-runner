@@ -38,8 +38,7 @@ public class Main {
                 logger.info("**** Found -p tag!");
                 
                 Path path = new Path(user_path, maze);
-                path.canonical();
-                path.isPathValid();
+                path.check();
             }
             else{
                 logger.info("**** NO -p ARGUMENT: Computing path for given Maze ****");

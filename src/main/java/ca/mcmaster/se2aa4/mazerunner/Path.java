@@ -19,8 +19,12 @@ public class Path {
         this.maze = maze; // calls the string version of the matrix
         this.user_path = path;
     }
+    public void check(){
+        canonical();
+        isPathValid();
+    }
 
-    public void canonical() {
+    private void canonical() {
         PathString pathlist = new PathString(user_path);
         can_path = pathlist.canonical_list();
     }
@@ -30,7 +34,7 @@ public class Path {
         return alg.compute();
     }
 
-    public void isPathValid() {
+    private void isPathValid() {
 
         try{
             logger.info("**** Checking path: East -> West");
