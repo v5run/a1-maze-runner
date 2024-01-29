@@ -16,7 +16,7 @@ public class Path {
 
     public Path(String path, Maze maze){
 
-        this.maze = maze; // calls the string version of the matrix
+        this.maze = maze;
         this.user_path = path;
     }
     public void check(){
@@ -29,7 +29,7 @@ public class Path {
         can_path = pathlist.canonical_list();
     }
 
-    public String compute() { // find a working path on the maze, maybe have different class
+    public String compute() {
         RightHandAlg alg = new RightHandAlg(maze);
         return alg.compute();
     }
@@ -40,9 +40,6 @@ public class Path {
             logger.info("**** Checking path: East -> West");
             PathCheck checker1 = new PathCheck(maze.getMaze(), can_path, "WEST", maze.getEEast(), maze.getEWest());
             status_east = checker1.status();
-            
-            //if (status_east){System.out.println("Path works from East to West");}
-            //else{System.out.println("Path failed: East to West");}
 
         } catch(IndexOutOfBoundsException e){
             System.out.println("Path failed: East to West");
@@ -52,10 +49,6 @@ public class Path {
             logger.info("**** Checking path: West -> East");
             PathCheck checker2 = new PathCheck(maze.getMaze(), can_path, "EAST", maze.getEWest(), maze.getEEast());            
             status_west = checker2.status();
-            
-        
-            //if (status_west){System.out.println("Path works from: West to East");}
-            //else{System.out.println("Path failed: West to East");}
 
         } catch(IndexOutOfBoundsException e){
             logger.info("**** Path failed: West to East");

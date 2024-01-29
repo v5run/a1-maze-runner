@@ -25,15 +25,14 @@ public class PathString {
 
     public String[] canonical_list(){
 
-        //System.out.println(path);
         char[] c_list = path.toCharArray();
-        // create a string
+        
         StringBuilder new_string = new StringBuilder();
 
         for (int i=0; i<(c_list.length);i++){
             if (Character.isDigit(c_list[i])){
                 
-                // find num, could be any length
+                
                 int numStart = i;
                 while (i<c_list.length && Character.isDigit(c_list[i])){i+=1;}
                 int numEnd = i-1;
@@ -52,8 +51,7 @@ public class PathString {
             }
         }
         logger.info("CANONICAL PATH: " + new_string);
-        //System.out.println();
-        //System.out.println(new_string.toString());
+        
         String[] new_list = new_string.toString().split("");
         return new_list;
     }

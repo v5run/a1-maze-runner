@@ -31,7 +31,7 @@ public class Main {
 
             logger.info("**** Reading the maze from file:  " + inputfile);
             logger.info("Maze: \n");
-            //maze.create(inputfile);
+            
             maze.matrix(inputfile);
 
             if (config.hasP()){
