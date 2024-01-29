@@ -12,27 +12,46 @@ public class PathString {
         this.path = path;
     }
 
+    public String combine(String[] args){
+
+        StringBuilder new_string = new StringBuilder();
+        new_string.append(path);
+
+        for (int i=0; i<args.length; i++){
+            new_string.append(args[i]);
+        }
+        return new_string.toString();
+    }
+
     public String[] canonical_list(){
 
         char[] c_list = path.toCharArray();
-        // create a string
+        
         StringBuilder new_string = new StringBuilder();
 
         for (int i=0; i<(c_list.length);i++){
             if (Character.isDigit(c_list[i])){
-                char num = c_list[i];
-                char next_char = c_list[i+1];
-                for (int j=0; j<(num - '0'); j++){
+                
+                
+                int numStart = i;
+                while (i<c_list.length && Character.isDigit(c_list[i])){i+=1;}
+                int numEnd = i-1;
+                StringBuilder numString = new StringBuilder();
+
+                for (int k=numStart; k <= numEnd; k++){numString.append(c_list[k]);}
+                int num = Integer.parseInt(numString.toString());
+
+                char next_char = c_list[i];
+                for (int j=0; j<num; j++){
                     new_string.append(Character.toUpperCase(next_char));
                 }
-                i+=1;
             }
             else if ((c_list[i] == 'F') || (c_list[i] == 'f') || (c_list[i] == 'R') || (c_list[i] == 'r') || (c_list[i] == 'L') || (c_list[i] == 'l')){
                 new_string.append(Character.toUpperCase(c_list[i]));
             }
         }
         logger.info("CANONICAL PATH: " + new_string);
-        System.out.println();
+        
         String[] new_list = new_string.toString().split("");
         return new_list;
     }
@@ -40,11 +59,11 @@ public class PathString {
         
         String[] c_list = c_path.split("");
         StringBuilder new_string = new StringBuilder();
-        int j;
+        int j, i;
 
-        for (int i=0; i<c_list.length - 1; i++){
+        for (i=0; i<c_list.length - 1; i++){
 
-            if (!(c_list[i].equals(c_list[i+1]))){new_string.append(c_list[i]);}
+            if (!(c_list[i].equals(c_list[i+1]))){new_string.append(c_list[i]); new_string.append(" ");}
             else{
                 int count = 0;
                 for (j=i; j<c_list.length; j++){
@@ -58,10 +77,15 @@ public class PathString {
                 i=j-1;
                 new_string.append(String.valueOf(count));
                 new_string.append(c_list[i]);
+                new_string.append(" ");
             }
         }
-        if (c_list.length > 0) {
+        
+        if (c_list.length > 0 && i < c_list.length - 1 && !c_list[i].equals(String.valueOf(new_string.charAt(new_string.length() - 1)))) {
             new_string.append(c_list[c_list.length - 1]);
+        }
+        if (!(c_list[i-1].equals("F"))){
+            new_string.append("F");
         }
         
         return new_string.toString();

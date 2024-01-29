@@ -13,9 +13,9 @@ public class Maze {
     
     private int[] e_east = new int[2];
     private int[] e_west = new int[2];
-    public String[][] string_matrix;
+    private String[][] string_matrix;
     
-    public void create(String filename) throws IOException{
+    private void create(String filename) throws IOException{
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -27,12 +27,13 @@ public class Maze {
                 }
             }
             System.out.println();
-            //logger.info(System.lineSeparator());
+            
         }
+        System.out.println();
     }
     public void matrix(String filename) throws IOException{
         
-        String[][] maze = new String[100][100];
+        String[][] maze = new String[10000][10000];
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         String line;
         int i=0, lengthOfFirstRow=0;
@@ -43,7 +44,7 @@ public class Maze {
             for (int j=0; j < lengthOfFirstRow; j++) {
                 
                 try {
-                    //System.out.println("[ " + i + ", " + j + " ]");
+                    
                     
                     if ((line.length() == 0)||(j>=line.length())){
                         maze[i][j]="PASS";
@@ -79,6 +80,11 @@ public class Maze {
             i+=1;
         }
         string_matrix = maze;
+
+        logger.info("Entry/Exit Points: ");
+        logger.info( "   West End: [" + Integer.toString(getEWest()[0]) + ", " + Integer.toString(getEWest()[1]) + "]");
+        logger.info( "   East End: [" + Integer.toString(getEEast()[0]) + ", " + Integer.toString(getEEast()[1]) + "]");
+        logger.info("\n");
     }
 
     public int[] getEEast() {
@@ -88,6 +94,8 @@ public class Maze {
     public int[] getEWest() {
         return e_west;
     }
-    
-    //public void entry_exit(){} //finds entry and exit points in maze
+
+    public String[][] getMaze(){
+        return string_matrix;
+    }
 }

@@ -1,81 +1,97 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import org.apache.commons.cli.*;
+
 import java.io.IOException;
 import com.sun.net.httpserver.HttpsConfigurator;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import java.util.logging.ConsoleHandler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger();
-    // make objects for maze, path classes
-
     public static void main(String[] args) {
-        int argP = 1;
         Maze maze = new Maze();
         
         logger.info("** Starting Maze Runner");
-        if (("-i").equals(args[0]) ||("--input").equals(args[0])){
-            logger.info("**** Reading the maze from file " + args[1]);
-            // send into maze reader to see if filename is good, else throw exception
-            try{
-                System.out.println("Maze: \n");
-                maze.create(args[1]);
-                System.out.println();
-
-                //store matrix as string
-                maze.matrix(args[1]);
-                System.out.println("Entry/Exit Points: ");
-                System.out.println( "   West End: [" + Integer.toString(maze.getEWest()[0]) + ", " + Integer.toString(maze.getEWest()[1]) + "]");
-                System.out.println( "   East End: [" + Integer.toString(maze.getEEast()[0]) + ", " + Integer.toString(maze.getEEast()[1]) + "]");
-                System.out.println();
-
-            } catch (IOException e){
-                logger.error("**** Innapropriate File name for Maze");
-                System.exit(0);
-            }
-        }
-        else{
-            // no -i, then exit
-            logger.error("/!\\No -i arguments given/!\\");
-            System.exit(1);
-        }
-
-        // if p arguments
         try{
-            if (("-p").equals(args[2])){ // account for spaces in args
+            Configuration config = configure(args);
+            String inputfile = config.getInputFile();
+            String cmd_path = config.getUserPath();
+            String[] p_args = config.getPArgs();
+            PathString pString = new PathString(cmd_path);
+            String user_path = pString.combine(p_args);            
+
+            logger.info("**** Reading the maze from file:  " + inputfile);
+            logger.info("Maze: \n");
+            
+            maze.matrix(inputfile);
+
+            if (config.hasP()){
                 logger.info("**** Found -p tag!");
                 
-                Path path = new Path(args[3], maze);
-                path.canonical();
-                path.status();
+                Path path = new Path(user_path, maze);
+                path.check();
             }
             else{
-                throw new ArrayIndexOutOfBoundsException();
-            }
-        } catch (ArrayIndexOutOfBoundsException e){
-            logger.info("/!\\No -p arguments given/!\\");
-            argP = 0;
-        }
-
-        // if no p arguments
-        try{
-            if (argP == 0){
-                logger.info("**** Computing path for given Maze ****");
-                //Path auto_path = new Path("none", maze);
-                //find the correct path b/c no path was given by the user
-
+                logger.info("**** NO -p ARGUMENT: Computing path for given Maze ****");
                 Path alg = new Path("none", maze);
-                System.out.println(alg.compute()); // compute the path on maze
-                String f_path = PathString.toFactorized(alg.compute()); //print factorized form of canonical
-                System.out.println("Computed Factorized Path: " + f_path);
-            }
-            else{
-                throw new ArrayIndexOutOfBoundsException();
+                logger.info(alg.compute());
+                System.out.println("Path: \n" + PathString.toFactorized(alg.compute()));
             }
         } catch (Exception e){
-            logger.error("PATH NOT COMPUTED");;
+            logger.error("**** Suspected: Innapropriate File name for Maze or missing -i");
+            e.printStackTrace();
+            System.exit(0);
         }
         logger.info("** End of MazeRunner **");
     }
+
+    private static class Configuration {
+        private final String inputFile;
+        private final String user_path;
+        private final boolean P;
+        private final String[] p_args;
+
+
+        public Configuration(String inputFile, String user_path, boolean P, String[] p_args) {
+            this.inputFile = inputFile;
+            this.user_path = user_path;
+            this.P = P;
+            this.p_args = p_args;
+        }
+        public String getInputFile() {
+            return inputFile;
+        }
+        public String getUserPath() {
+            return user_path;
+        }
+        public boolean hasP() {
+            return P;
+        }
+        public String[] getPArgs() {
+            return p_args;
+        }
+    }
+
+    private static Configuration configure(String[] args) throws ParseException {
+        Options options = new Options();
+        options.addOption("i", "input", true, "Input File path");
+        options.addOption("p", "path", true, "Input Path for Check");
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, args);
+        String inputFile = cmd.getOptionValue("i");
+        String user_path = cmd.getOptionValue("p");
+
+        String[] p_args = cmd.getArgs();
+        return new Configuration(inputFile, user_path, cmd.hasOption("p"), p_args);
+    }
+
 }
